@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
                 showText.setText("" + value);
             }
         });
-
+        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SPHelper.getInstance().clearSharedPreferences();
+            }
+        });
     }
 }
