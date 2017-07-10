@@ -1,2 +1,2 @@
 # SharedPreferences
-This is a package of commonly used methods of android tool library, used to simplify the use.
+This is a tool library that encapsulates the commonly used methods of Android SharedPreferences for simplicity.
