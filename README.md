@@ -4,7 +4,7 @@ This is a tool library that encapsulates the commonly used methods of Android Sh
 support minSdkVersion 9
 # setup1 Gradle
     dependencies {
-        compile 'com.lany:SharedPreferences:1.0.2'
+        compile 'com.lany:SharedPreferences:1.0.3'
     }
 #  setup2 init
     public class MyApp extends Application {
@@ -13,6 +13,8 @@ support minSdkVersion 9
         public void onCreate() {
             super.onCreate();
             SPHelper.getInstance().init(this, BuildConfig.DEBUG);
+            //If you need to encrypt
+            SPHelper.getInstance().setEncrypt(true, "user custom password");
         }
     }
 
@@ -24,7 +26,9 @@ or first activity
         public void onCreate() {
             super.onCreate();
             setContentView(R.layout.activity_main);
-            SPHelper.getInstance().init(this);
+            SPHelper.getInstance().init(this, BuildConfig.DEBUG);
+            //If you need to encrypt
+            SPHelper.getInstance().setEncrypt(true, "user custom password");
         }
     }
 # setup3

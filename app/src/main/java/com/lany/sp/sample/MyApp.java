@@ -10,5 +10,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         SPHelper.getInstance().init(this, BuildConfig.DEBUG);
+        //If you need to encrypt
+        SPHelper.getInstance().setEncrypt(true, "user custom password");
     }
 }

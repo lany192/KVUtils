@@ -18,6 +18,8 @@ public class SPHelper {
     private String mSpaceName;//默认存储空间名称
     private Context mContext;
     private boolean DEBUG = BuildConfig.DEBUG;
+    private String password = "";
+    private boolean isEncrypt = false;
 
     private SPHelper() {
 
@@ -50,6 +52,11 @@ public class SPHelper {
         Log.i(TAG, "SPHelper init-------------------------------");
     }
 
+    public void setEncrypt(boolean isEncrypt, String password) {
+        this.isEncrypt = isEncrypt;
+        this.password = password;
+    }
+
     private SharedPreferences getSharedPreferences() {
         return getSharedPreferences(mSpaceName);
     }
@@ -58,10 +65,20 @@ public class SPHelper {
         if (mContext == null) {
             throw new IllegalArgumentException("The context is null, please call the initialization method first!");
         }
-        if (TextUtils.isEmpty(spaceName)) {
-            return PreferenceManager.getDefaultSharedPreferences(mContext);
+        if (isEncrypt) {
+            SharedPreferences prefs;
+            if (TextUtils.isEmpty(spaceName)) {
+                prefs = new SecurePreferences(mContext, password, "my_default_preferences");
+            } else {
+                prefs = new SecurePreferences(mContext, password, spaceName);
+            }
+            return prefs;
         } else {
-            return mContext.getSharedPreferences(spaceName, Context.MODE_PRIVATE);
+            if (TextUtils.isEmpty(spaceName)) {
+                return PreferenceManager.getDefaultSharedPreferences(mContext);
+            } else {
+                return mContext.getSharedPreferences(spaceName, Context.MODE_PRIVATE);
+            }
         }
     }
 
