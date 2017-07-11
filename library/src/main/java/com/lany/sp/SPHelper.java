@@ -66,23 +66,43 @@ public class SPHelper {
     }
 
     public boolean exists(String key) {
-        return getSharedPreferences().contains(key);
+        boolean result = getSharedPreferences().contains(key);
+        if (DEBUG) {
+            Log.i(TAG, "exists key:" + key + " result:" + result);
+        }
+        return result;
     }
 
     public boolean exists(String spaceName, String key) {
-        return getSharedPreferences(spaceName).contains(key);
+        boolean result = getSharedPreferences(spaceName).contains(key);
+        if (DEBUG) {
+            Log.i(TAG, "exists key:" + key + " spaceName:" + spaceName + " result:" + result);
+        }
+        return result;
     }
 
     public String getString(String key) {
-        return getSharedPreferences().getString(key, "");
+        String value = getSharedPreferences().getString(key, "");
+        if (DEBUG) {
+            Log.i(TAG, "getString:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public String getString(String key, String defaultValue) {
-        return getSharedPreferences().getString(key, defaultValue);
+        String value = getSharedPreferences().getString(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getString:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public String getString(String spaceName, String key, String defaultValue) {
-        return getSharedPreferences(spaceName).getString(key, defaultValue);
+        String value = getSharedPreferences(spaceName).getString(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getString:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public void putString(String key, String value) {
@@ -114,15 +134,27 @@ public class SPHelper {
     }
 
     public boolean getBoolean(String key) {
-        return getSharedPreferences().getBoolean(key, false);
+        boolean value = getSharedPreferences().getBoolean(key, false);
+        if (DEBUG) {
+            Log.i(TAG, "getBoolean:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public boolean getBoolean(String key, boolean defaultValue) {
-        return getSharedPreferences().getBoolean(key, defaultValue);
+        boolean value = getSharedPreferences().getBoolean(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getBoolean:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public boolean getBoolean(String spaceName, String key, boolean defaultValue) {
-        return getSharedPreferences(spaceName).getBoolean(key, defaultValue);
+        boolean value = getSharedPreferences(spaceName).getBoolean(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getBoolean:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public void putBoolean(String key, boolean value) {
@@ -182,15 +214,27 @@ public class SPHelper {
     }
 
     public int getInt(String key) {
-        return getSharedPreferences().getInt(key, 0);
+        int value = getSharedPreferences().getInt(key, 0);
+        if (DEBUG) {
+            Log.i(TAG, "getInt:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public int getInt(String key, int defaultValue) {
-        return getSharedPreferences().getInt(key, defaultValue);
+        int value = getSharedPreferences().getInt(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getInt:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public int getInt(String spaceName, String key, int defaultValue) {
-        return getSharedPreferences(spaceName).getInt(key, defaultValue);
+        int value = getSharedPreferences(spaceName).getInt(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getInt:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public void putFloat(String key, float value) {
@@ -222,15 +266,27 @@ public class SPHelper {
     }
 
     public float getFloat(String key) {
-        return getSharedPreferences().getFloat(key, 0f);
+        float value = getSharedPreferences().getFloat(key, 0f);
+        if (DEBUG) {
+            Log.i(TAG, "getFloat:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public float getFloat(String key, float defaultValue) {
-        return getSharedPreferences().getFloat(key, defaultValue);
+        float value = getSharedPreferences().getFloat(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getFloat:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public float getFloat(String spaceName, String key, float defaultValue) {
-        return getSharedPreferences(spaceName).getFloat(key, defaultValue);
+        float value = getSharedPreferences(spaceName).getFloat(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getFloat:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public void putLong(String key, long value) {
@@ -262,15 +318,27 @@ public class SPHelper {
     }
 
     public long getLong(String key) {
-        return getSharedPreferences().getLong(key, 0L);
+        long value = getSharedPreferences().getLong(key, 0L);
+        if (DEBUG) {
+            Log.i(TAG, "getLong:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public long getLong(String key, long defaultValue) {
-        return getSharedPreferences().getLong(key, defaultValue);
+        long value = getSharedPreferences().getLong(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getLong:key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public long getLong(String spaceName, String key, long defaultValue) {
-        return getSharedPreferences(spaceName).getLong(key, defaultValue);
+        long value = getSharedPreferences(spaceName).getLong(key, defaultValue);
+        if (DEBUG) {
+            Log.i(TAG, "getLong:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
+        return value;
     }
 
     public void clearSharedPreferences() {
