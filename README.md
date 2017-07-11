@@ -12,7 +12,7 @@ support minSdkVersion 9
         @Override
         public void onCreate() {
             super.onCreate();
-            SPHelper.getInstance().init(this);
+            SPHelper.getInstance().init(this, BuildConfig.DEBUG);
         }
     }
 
