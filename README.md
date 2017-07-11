@@ -4,7 +4,7 @@ This is a tool library that encapsulates the commonly used methods of Android Sh
 support minSdkVersion 9
 # setup1 Gradle
     dependencies {
-        compile 'com.lany:SharedPreferences:1.0.1'
+        compile 'com.lany:SharedPreferences:1.0.2'
     }
 #  setup2 init
     public class MyApp extends Application {
