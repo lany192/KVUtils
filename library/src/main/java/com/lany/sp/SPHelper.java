@@ -6,15 +6,18 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 
 /**
  * SharedPreferences封装工具类
  */
 public class SPHelper {
+    private final String TAG = "SPHelper";
     private volatile static SPHelper instance;
     private String mSpaceName;//默认存储空间名称
     private Context mContext;
+    private boolean DEBUG = BuildConfig.DEBUG;
 
     private SPHelper() {
 
@@ -31,11 +34,11 @@ public class SPHelper {
         return instance;
     }
 
-    public void init(Context ctx) {
-        init(ctx, "");
+    public void init(Context ctx, boolean debug) {
+        init(ctx, "", debug);
     }
 
-    public void init(Context ctx, String spaceName) {
+    public void init(Context ctx, String spaceName, boolean debug) {
         Context app = ctx.getApplicationContext();
         if (app == null) {
             this.mContext = ctx;
@@ -43,6 +46,8 @@ public class SPHelper {
             this.mContext = ((Application) app).getBaseContext();
         }
         this.mSpaceName = spaceName;
+        this.DEBUG = debug;
+        Log.i(TAG, "SPHelper init-------------------------------");
     }
 
     private SharedPreferences getSharedPreferences() {
@@ -68,7 +73,6 @@ public class SPHelper {
         return getSharedPreferences(spaceName).contains(key);
     }
 
-
     public String getString(String key) {
         return getSharedPreferences().getString(key, "");
     }
@@ -82,18 +86,30 @@ public class SPHelper {
     }
 
     public void putString(String key, String value) {
+        if (DEBUG) {
+            Log.i(TAG, "putString:key==" + key + "----value:" + value);
+        }
         getSharedPreferences().edit().putString(key, value).apply();
     }
 
     public void putString(String spaceName, String key, String value) {
+        if (DEBUG) {
+            Log.i(TAG, "putString:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         getSharedPreferences(spaceName).edit().putString(key, value).apply();
     }
 
     public boolean putStringForResult(String key, String value) {
+        if (DEBUG) {
+            Log.i(TAG, "putStringForResult:key==" + key + "----value:" + value);
+        }
         return getSharedPreferences().edit().putString(key, value).commit();
     }
 
     public boolean putStringForResult(String spaceName, String key, String value) {
+        if (DEBUG) {
+            Log.i(TAG, "putStringForResult:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         return getSharedPreferences(spaceName).edit().putString(key, value).commit();
     }
 
@@ -110,34 +126,58 @@ public class SPHelper {
     }
 
     public void putBoolean(String key, boolean value) {
+        if (DEBUG) {
+            Log.i(TAG, "putBoolean:key==" + key + "----value:" + value);
+        }
         getSharedPreferences().edit().putBoolean(key, value).apply();
     }
 
     public void putBoolean(String spaceName, String key, boolean value) {
+        if (DEBUG) {
+            Log.i(TAG, "putBoolean:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         getSharedPreferences(spaceName).edit().putBoolean(key, value).apply();
     }
 
     public boolean putBooleanForResult(String key, boolean value) {
+        if (DEBUG) {
+            Log.i(TAG, "putBooleanForResult:key==" + key + "----value:" + value);
+        }
         return getSharedPreferences().edit().putBoolean(key, value).commit();
     }
 
     public boolean putBooleanForResult(String spaceName, String key, boolean value) {
+        if (DEBUG) {
+            Log.i(TAG, "putBooleanForResult:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         return getSharedPreferences(spaceName).edit().putBoolean(key, value).commit();
     }
 
     public void putInt(String key, int value) {
+        if (DEBUG) {
+            Log.i(TAG, "putInt:key==" + key + "----value:" + value);
+        }
         getSharedPreferences().edit().putInt(key, value).apply();
     }
 
     public void putInt(String spaceName, String key, int value) {
+        if (DEBUG) {
+            Log.i(TAG, "putInt:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         getSharedPreferences(spaceName).edit().putInt(key, value).apply();
     }
 
     public boolean putIntForResult(String key, int value) {
+        if (DEBUG) {
+            Log.i(TAG, "putIntForResult:key==" + key + "----value:" + value);
+        }
         return getSharedPreferences().edit().putInt(key, value).commit();
     }
 
     public boolean putIntForResult(String spaceName, String key, int value) {
+        if (DEBUG) {
+            Log.i(TAG, "putIntForResult:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         return getSharedPreferences(spaceName).edit().putInt(key, value).commit();
     }
 
@@ -154,18 +194,30 @@ public class SPHelper {
     }
 
     public void putFloat(String key, float value) {
+        if (DEBUG) {
+            Log.i(TAG, "putFloat:key==" + key + "----value:" + value);
+        }
         getSharedPreferences().edit().putFloat(key, value).apply();
     }
 
     public void putFloat(String spaceName, String key, float value) {
+        if (DEBUG) {
+            Log.i(TAG, "putFloat:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         getSharedPreferences(spaceName).edit().putFloat(key, value).apply();
     }
 
     public boolean putFloatForResult(String key, float value) {
+        if (DEBUG) {
+            Log.i(TAG, "putFloatForResult:key==" + key + "----value:" + value);
+        }
         return getSharedPreferences().edit().putFloat(key, value).commit();
     }
 
     public boolean putFloatForResult(String spaceName, String key, float value) {
+        if (DEBUG) {
+            Log.i(TAG, "putFloatForResult:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         return getSharedPreferences(spaceName).edit().putFloat(key, value).commit();
     }
 
@@ -182,18 +234,30 @@ public class SPHelper {
     }
 
     public void putLong(String key, long value) {
+        if (DEBUG) {
+            Log.i(TAG, "putLong:key==" + key + "----value:" + value);
+        }
         getSharedPreferences().edit().putLong(key, value).apply();
     }
 
     public void putLong(String spaceName, String key, long value) {
+        if (DEBUG) {
+            Log.i(TAG, "putLong:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         getSharedPreferences(spaceName).edit().putLong(key, value).apply();
     }
 
     public boolean putLongForResult(String key, long value) {
+        if (DEBUG) {
+            Log.i(TAG, "putLongForResult:key==" + key + "----value:" + value);
+        }
         return getSharedPreferences().edit().putLong(key, value).commit();
     }
 
     public boolean putLongForResult(String spaceName, String key, long value) {
+        if (DEBUG) {
+            Log.i(TAG, "putLongForResult:spaceName==" + spaceName + "------key==" + key + "----value:" + value);
+        }
         return getSharedPreferences(spaceName).edit().putLong(key, value).commit();
     }
 
@@ -210,12 +274,18 @@ public class SPHelper {
     }
 
     public void clearSharedPreferences() {
+        if (DEBUG) {
+            Log.i(TAG, "clearSharedPreferences");
+        }
         Editor editor = getSharedPreferences().edit();
         editor.clear();
         editor.apply();
     }
 
     public void clearSharedPreferences(String spaceName) {
+        if (DEBUG) {
+            Log.i(TAG, "clearSharedPreferences:spaceName==" + spaceName);
+        }
         Editor editor = getSharedPreferences(spaceName).edit();
         editor.clear();
         editor.apply();

@@ -8,7 +8,7 @@ publish {
     userOrg = 'lany192'
     groupId = 'com.lany'
     uploadName = 'SharedPreferences'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     autoPublish = true
     dryRun = false
     desc = 'This is a tool library that encapsulates the commonly used methods of Android SharedPreferences for simplicity.'

@@ -1,8 +1,10 @@
 # SharedPreferences
 This is a tool library that encapsulates the commonly used methods of Android SharedPreferences for simplicity.
+
+support minSdkVersion 9
 # setup1 Gradle
     dependencies {
-        compile 'com.lany:SharedPreferences:1.0.0'
+        compile 'com.lany:SharedPreferences:1.0.1'
     }
 #  setup2 init
     public class MyApp extends Application {

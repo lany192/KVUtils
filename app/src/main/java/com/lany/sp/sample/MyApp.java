@@ -9,6 +9,6 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SPHelper.getInstance().init(this);
+        SPHelper.getInstance().init(this, BuildConfig.DEBUG);
     }
 }
