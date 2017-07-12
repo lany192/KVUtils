@@ -20,6 +20,7 @@ public class SPHelper {
     private boolean DEBUG = BuildConfig.DEBUG;
     private String password = "";
     private boolean isEncrypt = false;
+    private SharedPreferences mSharedPreferences;
 
     private SPHelper() {
 
@@ -63,23 +64,25 @@ public class SPHelper {
 
     private SharedPreferences getSharedPreferences(String spaceName) {
         if (mContext == null) {
+            Log.e(TAG, "The context is null, please call the initialization method first!");
             throw new IllegalArgumentException("The context is null, please call the initialization method first!");
         }
-        if (isEncrypt) {
-            SharedPreferences prefs;
-            if (TextUtils.isEmpty(spaceName)) {
-                prefs = new SecurePreferences(mContext, password, "my_default_preferences");
+        if (mSharedPreferences == null) {
+            if (isEncrypt) {
+                if (TextUtils.isEmpty(spaceName)) {
+                    mSharedPreferences = new SecurePreferences(mContext, password, "my_default_preferences");
+                } else {
+                    mSharedPreferences = new SecurePreferences(mContext, password, spaceName);
+                }
             } else {
-                prefs = new SecurePreferences(mContext, password, spaceName);
-            }
-            return prefs;
-        } else {
-            if (TextUtils.isEmpty(spaceName)) {
-                return PreferenceManager.getDefaultSharedPreferences(mContext);
-            } else {
-                return mContext.getSharedPreferences(spaceName, Context.MODE_PRIVATE);
+                if (TextUtils.isEmpty(spaceName)) {
+                    mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+                } else {
+                    mSharedPreferences = mContext.getSharedPreferences(spaceName, Context.MODE_PRIVATE);
+                }
             }
         }
+        return mSharedPreferences;
     }
 
     public boolean exists(String key) {
