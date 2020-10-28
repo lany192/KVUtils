@@ -1,3 +1,4 @@
+[![](https://jitpack.io/v/lany192/KVUtils.svg)](https://jitpack.io/#lany192/KVUtils)
 # KVUtils
 
 基于tencent mmkv的key-value封装工具
@@ -11,6 +12,13 @@ Key-Value packaging tool based on Tencent MMKV
     4.API友好
 
 ## Import
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 
     dependencies {
         implementation 'com.tencent:mmkv-static:1.2.4'
