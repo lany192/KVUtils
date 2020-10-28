@@ -10,6 +10,7 @@ Key-Value packaging tool based on Tencent MMKV
     2.MMKV体积很小
     3.支持SharedPreferences旧数据迁移
     4.API友好
+    5.支持加密解密
 
 ## Import
 

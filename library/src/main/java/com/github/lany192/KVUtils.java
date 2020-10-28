@@ -2,7 +2,6 @@ package com.github.lany192;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,6 +14,18 @@ import com.tencent.mmkv.MMKV;
 public final class KVUtils {
     private volatile static KVUtils instance;
     private Context mContext;
+    /**
+     * 是否加密
+     */
+    private boolean encrypt;
+    /**
+     * 秘钥
+     */
+    private String cryptKey;
+    /**
+     * 是否迁移SharedPreferences旧数据
+     */
+    private boolean migrate;
 
     private KVUtils() {
     }
@@ -36,8 +47,17 @@ public final class KVUtils {
         Log.i("SPUtils", "mmkv工作目录: " + rootDir);
     }
 
-    private SharedPreferences getPreferences() {
-        return getPreferences(null);
+    public void setEncrypt(boolean encrypt, String cryptKey) {
+        this.encrypt = encrypt;
+        this.cryptKey = cryptKey;
+    }
+
+    public void setMigrate(boolean migrate) {
+        this.migrate = migrate;
+    }
+
+    private MMKV getMMKV() {
+        return getMMKV(null);
     }
 
     private SharedPreferences getOldPreferences(String name) {
@@ -48,144 +68,143 @@ public final class KVUtils {
         }
     }
 
-    private SharedPreferences getPreferences(String name) {
+    private MMKV getMMKV(String name) {
         MMKV mmkv;
         if (TextUtils.isEmpty(name)) {
-            mmkv = MMKV.mmkvWithID(mContext.getPackageName() + "_preferences", MMKV.MULTI_PROCESS_MODE);
+            mmkv = encrypt ? MMKV.defaultMMKV(MMKV.MULTI_PROCESS_MODE, cryptKey) : MMKV.defaultMMKV();
         } else {
-            mmkv = MMKV.mmkvWithID(name, MMKV.MULTI_PROCESS_MODE);
+            mmkv = encrypt ? MMKV.mmkvWithID(name, MMKV.MULTI_PROCESS_MODE, cryptKey) : MMKV.mmkvWithID(name, MMKV.MULTI_PROCESS_MODE);
         }
-        // 迁移旧数据 start
-        SharedPreferences oldSharedPreferences = getOldPreferences(name);
-        mmkv.importFromSharedPreferences(oldSharedPreferences);
-        oldSharedPreferences.edit().clear().apply();
-        // 迁移旧数据 end
+        if (migrate) {
+            //迁移SharedPreferences旧数据
+            SharedPreferences oldSharedPreferences = getOldPreferences(name);
+            mmkv.importFromSharedPreferences(oldSharedPreferences);
+            oldSharedPreferences.edit().clear().apply();
+        }
         return mmkv;
     }
 
     public String getString(String key) {
-        return getPreferences().getString(key, "");
+        return getMMKV().getString(key, "");
     }
 
     public String getString(String key, String defaultValue) {
-        return getPreferences().getString(key, defaultValue);
+        return getMMKV().getString(key, defaultValue);
     }
 
     public String getString(String name, String key, String defaultValue) {
-        return getPreferences(name).getString(key, defaultValue);
+        return getMMKV(name).getString(key, defaultValue);
     }
 
     public void putString(String key, String value) {
-        getPreferences().edit().putString(key, value);
+        getMMKV().putString(key, value);
     }
 
     public void putString(String name, String key, String value) {
-        getPreferences(name).edit().putString(key, value);
+        getMMKV(name).putString(key, value);
     }
 
     public boolean getBoolean(String key) {
-        return getPreferences().getBoolean(key, false);
+        return getMMKV().getBoolean(key, false);
     }
 
     public boolean getBoolean(String key, boolean defaultValue) {
-        return getPreferences().getBoolean(key, defaultValue);
+        return getMMKV().getBoolean(key, defaultValue);
     }
 
     public boolean getBoolean(String name, String key, boolean defaultValue) {
-        return getPreferences(name).getBoolean(key, defaultValue);
+        return getMMKV(name).getBoolean(key, defaultValue);
     }
 
     public void putBoolean(String key, boolean value) {
-        getPreferences().edit().putBoolean(key, value);
+        getMMKV().putBoolean(key, value);
     }
 
     public void putBoolean(String name, String key, boolean value) {
-        getPreferences(name).edit().putBoolean(key, value);
+        getMMKV(name).putBoolean(key, value);
     }
 
     public void putInt(String key, int value) {
-        getPreferences().edit().putInt(key, value);
+        getMMKV().putInt(key, value);
     }
 
     public void putInt(String name, String key, int value) {
-        getPreferences(name).edit().putInt(key, value);
+        getMMKV(name).putInt(key, value);
     }
 
     public int getInt(String key) {
-        return getPreferences().getInt(key, 0);
+        return getMMKV().getInt(key, 0);
     }
 
     public int getInt(String key, int defaultValue) {
-        return getPreferences().getInt(key, defaultValue);
+        return getMMKV().getInt(key, defaultValue);
     }
 
     public int getInt(String name, String key, int defaultValue) {
-        return getPreferences(name).getInt(key, defaultValue);
+        return getMMKV(name).getInt(key, defaultValue);
     }
 
     public void putFloat(String key, float value) {
-        getPreferences().edit().putFloat(key, value);
+        getMMKV().putFloat(key, value);
     }
 
     public void putFloat(String name, String key, float value) {
-        getPreferences(name).edit().putFloat(key, value);
+        getMMKV(name).putFloat(key, value);
     }
 
     public float getFloat(String key) {
-        return getPreferences().getFloat(key, 0f);
+        return getMMKV().getFloat(key, 0f);
     }
 
     public float getFloat(String key, float defaultValue) {
-        return getPreferences().getFloat(key, defaultValue);
+        return getMMKV().getFloat(key, defaultValue);
     }
 
     public float getFloat(String name, String key, float defaultValue) {
-        return getPreferences(name).getFloat(key, defaultValue);
+        return getMMKV(name).getFloat(key, defaultValue);
     }
 
     public void putLong(String key, long value) {
-        getPreferences().edit().putLong(key, value);
+        getMMKV().putLong(key, value);
     }
 
     public void putLong(String name, String key, long value) {
-        getPreferences(name).edit().putLong(key, value);
+        getMMKV(name).putLong(key, value);
     }
 
     public long getLong(String key) {
-        return getPreferences().getLong(key, 0L);
+        return getMMKV().getLong(key, 0L);
     }
 
     public long getLong(String key, long defaultValue) {
-        return getPreferences().getLong(key, defaultValue);
+        return getMMKV().getLong(key, defaultValue);
     }
 
     public long getLong(String name, String key, long defaultValue) {
-        return getPreferences(name).getLong(key, defaultValue);
+        return getMMKV(name).getLong(key, defaultValue);
     }
 
     public void remove(String key) {
-        getPreferences().edit().remove(key);
+        getMMKV().remove(key);
     }
 
     public void remove(String name, String key) {
-        getPreferences(name).edit().remove(key);
+        getMMKV(name).remove(key);
     }
 
     public void clear() {
-        Editor editor = getPreferences().edit();
-        editor.clear();
+        getMMKV().clear();
     }
 
     public void clear(String name) {
-        Editor editor = getPreferences(name).edit();
-        editor.clear();
+        getMMKV(name).clear();
     }
 
     public boolean exists(String key) {
-        return getPreferences().contains(key);
+        return getMMKV().contains(key);
     }
 
     public boolean exists(String name, String key) {
-        return getPreferences(name).contains(key);
+        return getMMKV(name).contains(key);
     }
 }
