@@ -1,38 +1,23 @@
-# SharedPreferences
-This is a tool library that encapsulates the commonly used methods of Android SharedPreferences for simplicity.
+# KVUtils
 
-support minSdkVersion 9
-# setup1 Gradle
+基于tencent mmkv的key-value封装工具
+Key-Value packaging tool based on Tencent MMKV
+
+## Import
+
     dependencies {
-        compile 'com.lany:SharedPreferences:1.0.4'
-    }
-#  setup2 init
-    public class MyApp extends Application {
-    
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            SPHelper.getInstance().init(this, BuildConfig.DEBUG);
-            //If you need to encrypt
-            SPHelper.getInstance().setEncrypt(true, "user custom password");
-        }
+        implementation 'com.tencent:mmkv-static:1.2.4'
+        implementation 'com.github.lany192:KVUtils:latest'
     }
 
-or first activity
+## Usage
 
-    public class MainActivity extends AppCompatActivity {
-    
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            setContentView(R.layout.activity_main);
-            SPHelper.getInstance().init(this, BuildConfig.DEBUG);
-            //If you need to encrypt
-            SPHelper.getInstance().setEncrypt(true, "user custom password");
-        }
-    }
-# setup3
-     SPHelper.getInstance().putString("my_key", value);
-     boolean result = SPHelper.getInstance().putStringForResult("my_key", value);
-     String value = SPHelper.getInstance().getString("my_key");
-     ......
+    KVUtils.get().putString("my_key", value);
+    KVUtils.get().putBoolean("my_key", true);
+    KVUtils.get().putInt("my_key", 999999);
+    String value = KVUtils.get().getString("my_key");
+    ......
+
+## Thanks
+
+MMKV https://github.com/Tencent/MMKV
