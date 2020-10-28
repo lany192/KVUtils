@@ -6,7 +6,9 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.getkeepsafe.relinker.ReLinker;
 import com.tencent.mmkv.MMKV;
+import com.tencent.mmkv.MMKVLogLevel;
 
 /**
  * MMKV封装工具类
@@ -43,8 +45,21 @@ public class KVUtils {
 
     public void init(Context context) {
         mContext = context;
-        String rootDir = MMKV.initialize(context);
+        String rootDir = context.getFilesDir().getAbsolutePath() + "/mmkv";
+        MMKV.initialize(rootDir, new MMKV.LibLoader() {
+            @Override
+            public void loadLibrary(String libName) {
+                ReLinker.loadLibrary(mContext, libName);
+            }
+        }, MMKVLogLevel.LevelNone);
         Log.i("SPUtils", "mmkv工作目录: " + rootDir);
+    }
+
+    /**
+     * 日志等级
+     */
+    public void setLogLevel(MMKVLogLevel level) {
+        MMKV.setLogLevel(level);
     }
 
     /**
@@ -76,6 +91,7 @@ public class KVUtils {
         } else {
             mmkv = encrypt ? MMKV.mmkvWithID(name, MMKV.MULTI_PROCESS_MODE, cryptKey) : MMKV.mmkvWithID(name, MMKV.MULTI_PROCESS_MODE);
         }
+
         if (migrate) {
             //迁移SharedPreferences旧数据
             SharedPreferences sharedPreferences;

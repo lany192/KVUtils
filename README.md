@@ -22,7 +22,6 @@ Key-Value packaging tool based on Tencent MMKV
 	}
 
     dependencies {
-        implementation 'com.tencent:mmkv-static:1.2.4'
         implementation 'com.github.lany192:KVUtils:latest'
     }
 

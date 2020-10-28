@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.lany192'
+group = 'com.github.lany192'
 
 android {
     compileSdkVersion 30
@@ -22,5 +22,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.tencent:mmkv-static:1.2.4'
+    api 'com.tencent:mmkv-static:1.2.4'
+    api 'com.getkeepsafe.relinker:relinker:1.4.1'
 }
