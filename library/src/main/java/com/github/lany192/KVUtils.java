@@ -55,7 +55,7 @@ public final class KVUtils {
         } else {
             mmkv = MMKV.mmkvWithID(name, MMKV.MULTI_PROCESS_MODE);
         }
-        // 迁移旧数据 start，2021年11月以后可以删除这段代码
+        // 迁移旧数据 start
         SharedPreferences oldSharedPreferences = getOldPreferences(name);
         mmkv.importFromSharedPreferences(oldSharedPreferences);
         oldSharedPreferences.edit().clear().apply();

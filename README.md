@@ -3,6 +3,13 @@
 基于tencent mmkv的key-value封装工具
 Key-Value packaging tool based on Tencent MMKV
 
+使用MMKV代替SharedPreferences的理由：
+
+    1.更好的性能
+    2.MMKV体积很小
+    3.支持SharedPreferences旧数据迁移
+    4.API友好
+
 ## Import
 
     dependencies {
