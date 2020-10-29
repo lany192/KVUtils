@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SPUtils.init(getBaseContext());
-        KVUtils.get().setEncrypt(true, "sdfsdfsdfs");
+        String cryptKey = "s1d#f%sdfsdfs";
+        KVUtils.get().setEncrypt(true, cryptKey);
         mEditText = findViewById(R.id.show1);
         showText = findViewById(R.id.show2);
         findViewById(R.id.test1).setOnClickListener(v -> {
