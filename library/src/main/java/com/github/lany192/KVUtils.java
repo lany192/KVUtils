@@ -9,6 +9,9 @@ import com.getkeepsafe.relinker.ReLinker;
 import com.tencent.mmkv.MMKV;
 import com.tencent.mmkv.MMKVLogLevel;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * MMKV封装工具类
  */
@@ -77,11 +80,11 @@ public class KVUtils {
         this.migrate = migrate;
     }
 
-    private MMKV getMMKV() {
+    public MMKV getMMKV() {
         return getMMKV(null);
     }
 
-    private MMKV getMMKV(String name) {
+    public MMKV getMMKV(String name) {
         MMKV mmkv;
         if (TextUtils.isEmpty(name)) {
             mmkv = encrypt ? MMKV.defaultMMKV(MMKV.MULTI_PROCESS_MODE, cryptKey) : MMKV.defaultMMKV(MMKV.MULTI_PROCESS_MODE, null);
@@ -102,6 +105,27 @@ public class KVUtils {
         return mmkv;
     }
 
+    //String Set类型---------------------------------------------------------------------------------
+    public Set<String> getStringSet(String key) {
+        return getMMKV().getStringSet(key, new HashSet<>());
+    }
+
+    public Set<String> getStringSet(String key, Set<String> defValues) {
+        return getMMKV().getStringSet(key, defValues);
+    }
+
+    public Set<String> getStringSet(String name, String key, Set<String> defValues) {
+        return getMMKV(name).getStringSet(key, defValues);
+    }
+
+    public void putStringSet(String key, Set<String> values) {
+        getMMKV().putStringSet(key, values);
+    }
+
+    public void putStringSet(String name, String key, Set<String> values) {
+        getMMKV(name).putStringSet(key, values);
+    }
+
     //Double类型---------------------------------------------------------------------------------
     public void putDouble(String key, double value) {
         getMMKV().encode(key, value);
@@ -111,12 +135,12 @@ public class KVUtils {
         return getMMKV().decodeDouble(key);
     }
 
-    public double getDouble(String key, double defaultValue) {
-        return getMMKV().decodeDouble(key, defaultValue);
+    public double getDouble(String key, double defValue) {
+        return getMMKV().decodeDouble(key, defValue);
     }
 
-    public double getDouble(String name, String key, double defaultValue) {
-        return getMMKV(name).decodeDouble(key, defaultValue);
+    public double getDouble(String name, String key, double defValue) {
+        return getMMKV(name).decodeDouble(key, defValue);
     }
     //byte[]类型---------------------------------------------------------------------------------
 
@@ -128,12 +152,12 @@ public class KVUtils {
         return getMMKV().decodeBytes(key);
     }
 
-    public byte[] getBytes(String key, byte[] defaultValue) {
-        return getMMKV().decodeBytes(key, defaultValue);
+    public byte[] getBytes(String key, byte[] defValue) {
+        return getMMKV().decodeBytes(key, defValue);
     }
 
-    public byte[] getBytes(String name, String key, byte[] defaultValue) {
-        return getMMKV(name).decodeBytes(key, defaultValue);
+    public byte[] getBytes(String name, String key, byte[] defValue) {
+        return getMMKV(name).decodeBytes(key, defValue);
     }
     //String类型---------------------------------------------------------------------------------
 
@@ -141,12 +165,12 @@ public class KVUtils {
         return getMMKV().getString(key, "");
     }
 
-    public String getString(String key, String defaultValue) {
-        return getMMKV().getString(key, defaultValue);
+    public String getString(String key, String defValue) {
+        return getMMKV().getString(key, defValue);
     }
 
-    public String getString(String name, String key, String defaultValue) {
-        return getMMKV(name).getString(key, defaultValue);
+    public String getString(String name, String key, String defValue) {
+        return getMMKV(name).getString(key, defValue);
     }
 
     public void putString(String key, String value) {
@@ -162,12 +186,12 @@ public class KVUtils {
         return getMMKV().getBoolean(key, false);
     }
 
-    public boolean getBoolean(String key, boolean defaultValue) {
-        return getMMKV().getBoolean(key, defaultValue);
+    public boolean getBoolean(String key, boolean defValue) {
+        return getMMKV().getBoolean(key, defValue);
     }
 
-    public boolean getBoolean(String name, String key, boolean defaultValue) {
-        return getMMKV(name).getBoolean(key, defaultValue);
+    public boolean getBoolean(String name, String key, boolean defValue) {
+        return getMMKV(name).getBoolean(key, defValue);
     }
 
     public void putBoolean(String key, boolean value) {
@@ -191,12 +215,12 @@ public class KVUtils {
         return getMMKV().getInt(key, 0);
     }
 
-    public int getInt(String key, int defaultValue) {
-        return getMMKV().getInt(key, defaultValue);
+    public int getInt(String key, int defValue) {
+        return getMMKV().getInt(key, defValue);
     }
 
-    public int getInt(String name, String key, int defaultValue) {
-        return getMMKV(name).getInt(key, defaultValue);
+    public int getInt(String name, String key, int defValue) {
+        return getMMKV(name).getInt(key, defValue);
     }
 
     //Float类型-----------------------------------------------------------------------------------------------
@@ -212,12 +236,12 @@ public class KVUtils {
         return getMMKV().getFloat(key, 0f);
     }
 
-    public float getFloat(String key, float defaultValue) {
-        return getMMKV().getFloat(key, defaultValue);
+    public float getFloat(String key, float defValue) {
+        return getMMKV().getFloat(key, defValue);
     }
 
-    public float getFloat(String name, String key, float defaultValue) {
-        return getMMKV(name).getFloat(key, defaultValue);
+    public float getFloat(String name, String key, float defValue) {
+        return getMMKV(name).getFloat(key, defValue);
     }
 
     //Long类型-----------------------------------------------------------------------------------------------
@@ -233,12 +257,12 @@ public class KVUtils {
         return getMMKV().getLong(key, 0L);
     }
 
-    public long getLong(String key, long defaultValue) {
-        return getMMKV().getLong(key, defaultValue);
+    public long getLong(String key, long defValue) {
+        return getMMKV().getLong(key, defValue);
     }
 
-    public long getLong(String name, String key, long defaultValue) {
-        return getMMKV(name).getLong(key, defaultValue);
+    public long getLong(String name, String key, long defValue) {
+        return getMMKV(name).getLong(key, defValue);
     }
 
     //其他方法-----------------------------------------------------------------------------------------------
