@@ -5,6 +5,26 @@
     android:orientation="vertical"
     android:padding="32dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/test1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="test1" />
+
+        <Button
+            android:id="@+id/test2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="test2" />
+    </LinearLayout>
+
     <EditText
         android:id="@+id/show1"
         android:layout_width="match_parent"
