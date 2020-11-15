@@ -26,6 +26,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.tencent:mmkv-static:1.2.4'
+    //https://github.com/tencent/mmkv
+    api 'com.tencent:mmkv-static:1.2.5'
+    //https://github.com/KeepSafe/ReLinker
     api 'com.getkeepsafe.relinker:relinker:1.4.1'
 }
