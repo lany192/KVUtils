@@ -5,7 +5,7 @@
     <application>
         <provider
             android:name=".KVContentProvider"
-            android:authorities="${applicationId}.KVProvider"
+            android:authorities="com.github.lany192.kv.KVProvider"
             android:enabled="true"
             android:exported="true" />
     </application>
