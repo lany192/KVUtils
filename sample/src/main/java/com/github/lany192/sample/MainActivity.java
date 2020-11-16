@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        KVUtils.get().init(getApplicationContext());
         SPUtils.init(getBaseContext());
         String cryptKey = "s1d#f%sdfsdfs";
         KVUtils.get().setEncrypt(true, cryptKey);
