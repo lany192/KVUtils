@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.github.lany192.KVUtils;
+import com.github.lany192.kv.KVUtils;
 
 import java.util.Locale;
 
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         KVUtils.get().init(getApplicationContext());
         SPUtils.init(getBaseContext());
-        String cryptKey = "s1d#f%sdfsdfs";
+        String cryptKey = "s1d#f%sdf@sd!fs";
         KVUtils.get().setEncrypt(true, cryptKey);
         mEditText = findViewById(R.id.show1);
         showText = findViewById(R.id.show2);
