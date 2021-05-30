@@ -49,7 +49,7 @@ public class KVUtils {
         mContext = context;
         String root = context.getFilesDir().getAbsolutePath() + "/mmkv";
         if (android.os.Build.VERSION.SDK_INT == 19) {
-            MMKV.initialize(root, libName -> ReLinker.loadLibrary(context, libName));
+            MMKV.initialize(context, root, libName -> ReLinker.loadLibrary(context, libName));
         } else {
             MMKV.initialize(context);
         }
