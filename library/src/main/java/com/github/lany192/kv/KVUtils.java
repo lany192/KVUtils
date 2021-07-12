@@ -9,6 +9,7 @@ import com.getkeepsafe.relinker.ReLinker;
 import com.tencent.mmkv.MMKV;
 import com.tencent.mmkv.MMKVLogLevel;
 
+import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import java.util.Set;
  */
 public class KVUtils {
     private volatile static KVUtils instance;
-    private Context mContext;
+    private WeakReference<Context> reference;
     /**
      * 是否加密
      */
@@ -46,7 +47,7 @@ public class KVUtils {
     }
 
     public void init(Context context) {
-        mContext = context;
+        reference = new WeakReference<>(context);
         String root = context.getFilesDir().getAbsolutePath() + "/mmkv";
         if (android.os.Build.VERSION.SDK_INT == 19) {
             MMKV.initialize(context, root, libName -> ReLinker.loadLibrary(context, libName));
@@ -95,9 +96,9 @@ public class KVUtils {
             //迁移SharedPreferences旧数据
             SharedPreferences sharedPreferences;
             if (TextUtils.isEmpty(name)) {
-                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(reference.get());
             } else {
-                sharedPreferences = mContext.getSharedPreferences(name, Context.MODE_PRIVATE);
+                sharedPreferences = reference.get().getSharedPreferences(name, Context.MODE_PRIVATE);
             }
             mmkv.importFromSharedPreferences(sharedPreferences);
             sharedPreferences.edit().clear().apply();

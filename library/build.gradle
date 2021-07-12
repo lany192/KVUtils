@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-
-group = 'com.github.lany192'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 30
@@ -30,4 +28,14 @@ dependencies {
     implementation 'com.tencent:mmkv-static:1.2.9'
     //https://github.com/KeepSafe/ReLinker
     api 'com.getkeepsafe.relinker:relinker:1.4.1'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.github.lany192'
+            artifactId = 'KVUtils'
+            version = '1.0.5'
+        }
+    }
 }
