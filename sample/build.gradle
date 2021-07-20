@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    ndkVersion "22.0.7026061"
+    compileSdkVersion 31
+
     defaultConfig {
         applicationId "com.github.lany192.sample"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
     }
@@ -29,5 +29,5 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     implementation project(':library')
     //https://github.com/tencent/mmkv
-    implementation 'com.tencent:mmkv-static:1.2.9'
+    implementation 'com.tencent:mmkv-static:1.2.10'
 }

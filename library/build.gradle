@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0.0"
     }
@@ -25,17 +25,25 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //https://github.com/tencent/mmkv
-    implementation 'com.tencent:mmkv-static:1.2.9'
+    implementation 'com.tencent:mmkv-static:1.2.10'
     //https://github.com/KeepSafe/ReLinker
     api 'com.getkeepsafe.relinker:relinker:1.4.1'
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = 'com.github.lany192'
-            artifactId = 'KVUtils'
-            version = '1.0.5'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                pom {
+                    licenses {
+                        license {
+                            name = "The Apache License, Version 2.0"
+                            url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        }
+                    }
+                }
+            }
         }
     }
 }
