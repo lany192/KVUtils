@@ -1,1 +1,4 @@
-include ':sample', ':library'
+include ':sample'
+include ':mmkv'
+include ':spkv'
+include ':dskv'

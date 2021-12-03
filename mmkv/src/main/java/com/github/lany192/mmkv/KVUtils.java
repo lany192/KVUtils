@@ -1,4 +1,4 @@
-package com.github.lany192.kv;
+package com.github.lany192.mmkv;
 
 import android.content.Context;
 import android.content.SharedPreferences;

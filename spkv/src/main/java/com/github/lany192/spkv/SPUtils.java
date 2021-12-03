@@ -1,4 +1,4 @@
-package com.github.lany192.sample;
+package com.github.lany192.spkv;
 
 
 import android.content.Context;

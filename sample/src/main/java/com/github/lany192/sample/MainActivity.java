@@ -7,7 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.github.lany192.kv.KVUtils;
+import com.github.lany192.mmkv.KVUtils;
+import com.github.lany192.spkv.SPUtils;
 
 import java.util.Locale;
 
